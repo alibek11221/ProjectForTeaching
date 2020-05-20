@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using ProjectCoreLibrary.DataAccess;
 using ProjectCoreLibrary.Models;
 
@@ -6,24 +8,21 @@ namespace ProjectCoreLibrary.Controllers
 {
 	public class EmployeeController
 	{
-		private readonly IDataAccess<EmployeeModel> _dataAccess;
+		private readonly IDataAccess<IEmployeeModel> _dataAccess;
 
-		public EmployeeController(IDataAccess<EmployeeModel> dataAccess)
+		public EmployeeController(IDataAccess<IEmployeeModel> dataAccess)
 		{
-			this._dataAccess = dataAccess;
+			_dataAccess = dataAccess;
 		}
 
-		public void SaveEmployee(EmployeeModel employee)
+		public void SaveEmployee(IEmployeeModel employee)
 		{
 			_dataAccess.Save(employee);
 		}
 
-		public void LoadEmployee()
+		public List<IEmployeeModel> LoadEmployee()
 		{
-			foreach (var item in _dataAccess.Load())
-			{
-				Console.WriteLine($"{item.Id}\n{item.Name}\n{item.Email}\n{item.Age}");
-			}
+			return _dataAccess.Load();
 		}
 	}
 }

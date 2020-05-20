@@ -2,7 +2,7 @@
 
 namespace ProjectCoreLibrary.Models
 {
-	public class EmployeeModel : IModel
+	public class EmployeeModel : IModel, IEmployeeModel
 	{
 		private DateTime _birthDate;
 		private string _name;

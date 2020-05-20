@@ -13,12 +13,9 @@ namespace ProjectCoreLibrary.DataAccess
 
 		public List<T> Load()
 		{
-			if (File.Exists(_path))
-			{
-				var text = File.ReadAllText(_path);
-				return JsonConvert.DeserializeObject<List<T>>(text);
-			}
-			return new List<T>();
+			if (!File.Exists(_path)) return new List<T>();
+			var text = File.ReadAllText(_path);
+			return JsonConvert.DeserializeObject<List<T>>(text);
 		}
 
 		public void Save(T obj)
